@@ -2,12 +2,12 @@
 local windowWidth, windowHeight = 800, 600
 local playerSprite = love.graphics.newImage("survivor.png")
 local playerAngle = 0
-local playerSpeed = 1.7
+local playerSpeed = 2
 
 love.window.setTitle("Puto el k lea esto")
 love.window.setMode(windowWidth, windowHeight, {
     resizable = false,
-    vsync = 0
+    vsync = 1
 })
 
 -- Define spawn position for the player
@@ -31,6 +31,7 @@ function love.load()
 end
 
 function love.update(dt)
+
     -- Move the player
     if love.keyboard.isDown("w") then
         player.y = player.y - playerSpeed
@@ -44,6 +45,13 @@ function love.update(dt)
     if love.keyboard.isDown("d") then
         player.x = player.x + playerSpeed
     end
+
+    -- Rotate player
+    local mouseX, mouseY = love.mouse.getPosition()
+    local distanceX = mouseX - player.x
+    local distanceY = mouseY - player.y
+    playerAngle = math.atan2(distanceY - player.h, distanceX - player.w)
+
 end
 
 -- Callback function used to draw on screen every frame
