@@ -3,27 +3,14 @@ local windowWidth, windowHeight = 800, 600
 local playerSprite = love.graphics.newImage("survivor.png")
 local playerAngle = 0
 local playerSpeed = 2
+local projectiles = 0
+local projectileSpeed = 5
 
 love.window.setTitle("Puto el k lea esto")
 love.window.setMode(windowWidth, windowHeight, {
     resizable = false,
     vsync = 1
 })
-
--- Define spawn position for the player
-function setPlayerSpawnPosition()
-    local playerHeight = playerSprite:getHeight()
-    local playerWidth = playerSprite:getWidth()
-
-    local playerXPos = (windowWidth / 2) - (playerWidth / 2)
-    local playerYPos = (windowHeight / 2) - (playerHeight / 2)
-
-    player = {}
-    player.x = playerXPos
-    player.y = playerYPos
-    player.w = playerWidth
-    player.h = playerHeight
-end
 
 -- This funtion is called one at the beginning of the game
 function love.load()
@@ -54,7 +41,32 @@ function love.update(dt)
 
 end
 
+function love.mousepressed(x, y, btn, istouch, presses)
+    if btn == 1 then
+        print("Shoot")
+    end
+end
+
 -- Callback function used to draw on screen every frame
 function love.draw()
     love.graphics.draw(playerSprite, player.x, player.y, playerAngle)
+end
+
+--[[
+    INIT FUNCTIONS
+]]
+
+-- Define spawn position for the player
+function setPlayerSpawnPosition()
+    local playerHeight = playerSprite:getHeight()
+    local playerWidth = playerSprite:getWidth()
+
+    local playerXPos = (windowWidth / 2) - (playerWidth / 2)
+    local playerYPos = (windowHeight / 2) - (playerHeight / 2)
+
+    player = {}
+    player.x = playerXPos
+    player.y = playerYPos
+    player.w = playerWidth
+    player.h = playerHeight
 end
